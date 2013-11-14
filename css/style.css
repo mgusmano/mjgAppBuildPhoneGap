@@ -236,7 +236,7 @@ a.f-ref{
 	overflow: hidden;
 	position: relative;
 	background: #fff;
-	cursor: default;
+	cursor: pointer ;
 }
 .img-cont{
 	height: 40%;
