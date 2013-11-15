@@ -1,9 +1,25 @@
 <!DOCTYPE HTML>
-<html manifest="" lang="en-US">
+<html manifest="" lang="en-US" ng-app>
 <head>
     <meta charset="UTF-8">
     <title>mjgApp</title>
-    <script src="js/jquery-1.9.1.js"></script>
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery.qrcode-0.7.0.js"></script>
+    <script src="http://code.angularjs.org/1.2.0/angular.min.js"></script>
+
+<script>
+    function AccomplishCtrl($scope) {
+        $scope.accomplishments = [
+            { text: '- BS Business Administration, University Of Illinois, May 1984' },
+            { text: '- Microsoft Regional Director in the US Midwest District for 3 years' },
+            { text: '- Developing brower-based web applications for the past 10 years' },
+            { text: '- Speaker at numerous conferences, including Microsoft TechEd' },
+            { text: '- Founder/Partner, The Bismarck Group, Chicago, IL' },
+            { text: '- Partner, The Information Management Group, Chicago, IL' }
+        ];
+    }
+</script>
+
     <style type="text/css">
          /**
          * Example of an initial loading indicator.
@@ -228,7 +244,7 @@
         }
     }
 
-})(this);Ext.blink({"id":"43c07621-ff6e-4ac5-8bd9-7dd45720baa5","js":[{"path":"app.js"},{"path":"js/modernizr.custom.08464.js"},{"path":"app.js"}],"css":[{"path":"resources/css/app.css","update":"delta"},{"path":"css/cover.css","update":"delta"},{"path":"css/style.css","update":"delta"},{"path":"css/demo.css","update":"delta"}]});</script>
+})(this);Ext.blink({"id":"43c07621-ff6e-4ac5-8bd9-7dd45720baa5","js":[{"path":"app.js"},{"path":"js/modernizr.custom.08464.js"},{"path":"js/jquery.qrcode-0.7.0.js"},{"path":"app.js"}],"css":[{"path":"resources/css/app.css","update":"delta"},{"path":"css/cover.css","update":"delta"},{"path":"css/style.css","update":"delta"},{"path":"css/demo.css","update":"delta"}]});</script>
 
 </head>
 <body>
@@ -410,19 +426,19 @@
                 Microsoft SharePoint architecture with experience building HTML5 Single Page Applications; working on the requirements,
                 design and development and implementation of custom solutions.
             </div>
-            <div class="f14 myBody" style="margin: 20px 0px 0px 0px;">
-                - BS Business Administration, University Of Illinois, May 1984<br />
-                - Microsoft Regional Director in the US Midwest District for 3 years<br />
-                - Developing brower-based web applications for the past 10 years<br />
-                - Speaker at numerous conferences, including Microsoft TechEd<br />
-                - Founder/Partner, The Bismarck Group, Chicago, IL<br />
-                - Partner, The Information Management Group, Chicago, IL
+            <div ng-controller="AccomplishCtrl" class="f14 myBody" style="margin: 20px 0px 0px 0px;">
+                <ul>
+                    <li ng-repeat="accomplishment in accomplishments">
+                        {{accomplishment.text}}
+                    </li>
+                </ul>
             </div>
             <div class="f14 myBody" style="font-style: italic; color: #146BA8; margin: 20px 0px 0px 0px;">
                 "I have a passion for building outstanding software, especially leading edge, user-centric applications.
                 I love to delight my clients, and have a track record of doing exactly that.
                 I enjoy working for an innovative, driven company who understands the balance of working hard and enjoying life..."
             </div>
+
             <div class="f12 myBody" style="margin: 20px 0px 0px 0px;">
                 847-331-2020<br />
                 mgusmano@yahoo.com
@@ -436,6 +452,13 @@
                 <div class="cover-elements">
                     <h1 class="f18">Swipe or drag</h1>
                     <h1 class="f18">to flip pages</h1>
+                    <div>
+                        <div id="qrcode"></div>
+                        <div style="width:200px;color: white;text-align:center;">use QR code to scan</div>
+                        <div style="width: 200px; color: white; text-align: center;">to phone or iPad</div>
+                    </div>
+
+
                     <div class="f-cover-story f16"><span>Projects Summary</span>Marc Gusmano<div>&nbsp</div></div>
                 </div>
                 <div class="f-cover-flip f24">&lt; Flip The Page</div>
@@ -459,6 +482,7 @@
                         Tools: <a target="_blank" class="lnk" href="https://www.atlassian.com/software/jira">Jira (requirements, tasks, ticketing)</a>, <a target="_blank" class="lnk" href="http://git-scm.com/">Git (version control</a>), Continuous Integration (internal tool)
                         <br />Browser: <a target="_blank" class="lnk" href="http://www.sencha.com/products/touch/">Sencha Touch 2.3</a>, <a target="_blank" class="lnk" href="http://jquery.com/">JQuery 1.9.1</a>, <a target="_blank" class="lnk" href="http://www.bryntum.com/products/siesta/">Siesta (testing)</a>, <a target="_blank" class="lnk" href="http://phonegap.com/">PhoneGap</a>
                         <br />Server: <a target="_blank" class="lnk" href="http://msdn.microsoft.com/en-us/library/ms171868(v=vs.110).aspx">Microsoft .NET Framework 4.5 in C#</a>, <a target="_blank" class="lnk" href="http://msdn.microsoft.com/en-us/library/ms731082(v=vs.110).aspx">Microsoft Windows Communication Foundation (WCF)</a>, <a target="_blank" class="lnk" href="https://www.microsoft.com/en-us/sqlserver/default.aspx">SQL Server 2010</a>
+                        <br /><br /><span id="qrcodeMobile"></span>use QR code to scan to phone or iPad
                     </div>
                 </div>
 
@@ -473,6 +497,7 @@
                         Tools: <a target="_blank" class="lnk" href="https://www.atlassian.com/software/jira">Jira (requirements, task management, ticketing)</a>, <a target="_blank" class="lnk" href="http://git-scm.com/">Git (version control</a>)
                         <br />Browser: <a target="_blank" class="lnk" href="http://www.sencha.com/products/extjs/">Sencha ExtJS 4.2</a>, <a target="_blank" class="lnk" href="http://jquery.com/">JQuery 1.9.1</a>, <a target="_blank" class="lnk" href="http://www.bryntum.com/products/siesta/">Siesta (testing)</a> ,
                         <br />Server: <a target="_blank" class="lnk" href="http://msdn.microsoft.com/en-us/library/ms171868(v=vs.110).aspx">Microsoft .NET Framework 4.5 in C#</a>, <a target="_blank" class="lnk" href="http://msdn.microsoft.com/en-us/library/ms731082(v=vs.110).aspx">Microsoft WCF</a>, <a target="_blank" class="lnk" href="https://www.microsoft.com/en-us/sqlserver/default.aspx">SQL Server</a>
+                        <br /><br /><span id="qrcodeEMSPEED12"></span>use QR code to scan to phone or iPad
                     </div>
                 </div>
             </div>
@@ -493,9 +518,14 @@
                     <div class="f14">November 2013</div>
                     <div class="f16 myBody">
                         Resume implemented as a mobile web application.  Includes several innovative ways to page through data.
+                        Showcases many different developer frameworks and libraries.
+
                     </div>
                     <div class="f16 myBody">
-                        HTML5, Sencha Touch 2.3, JQuery 1.9.1, JavaScript, CSS/SASS, Windows Azure Hosting
+                        HTML5, Sencha Touch 2.3, JQuery 1.9.1, AngularJS 1.2.1 (Data Binding, Controller), Modernizr (CSS 3D Transforms and Transitions), JavaScript, CSS/SASS, Windows Azure Hosting
+                    </div>
+                    <div class="f16 myBody">
+                        JQuery plugins: MockJax (AJAX Mocking), jquery.flips, TouchSwipe
                     </div>
                 </div>
                 <div class="box w-90 h-50 box-b-l box-b-r box-img-left">
@@ -659,10 +689,10 @@
                 <div class="box w-50 h-60 box-b-l box-b-r">
                     <div class="f18">Major Midwest US Energy Company - Exelon Corporation</div>
                     <div class="f14">March 2009 – October 2009</div>
-                    <div class="f12 myBody">
+                    <div class="f14 myBody">
                         Architected and led the development of a Site Ownership web part to gather site information from site administrators across SharePoint sites into a Central site directory.  This solution was implemented as a web part written utilizing Visual Studio 2008 and C#, and utilized the SharePoint Object Model to create a dynamic Site Ownership form from a view defined in the SharePoint site directory list - this allowed for dynamic creation of a form that displays any fields an administrator chooses to expose.  The web part also utilizes the SharePoint object model to allow for editing of the Site Directory from external SharePoint sites with no additional security needing to be applied.
                     </div>
-                    <div class="f12 myBody">
+                    <div class="f14 myBody">
                         Designed and constructed an Advanced Query solution that used the SharePoint Search object model to query against an Oracle database that utilized Business Data Services for its indexing.  The solution was implemented as a web part built with Microsoft .NET, AJAX and JavaScript to provide for an enhanced user experience, and displayed the returned results in a SharePoint ‘SPGridView, that provided for real time sorting and paging.  the Web Part was written utilizing Visual Studio 2008 and C#.
                     </div>
                 </div>
@@ -678,10 +708,10 @@
                 <div class="box w-25 h-60 box-b-l box-b-r">
                     <div class="f18">Argonne National Lab</div>
                     <div class="f14">March 2008 – October 2008</div>
-                    <div class="f12 myBody">
-                        Architected and implemented the SharePoint components of Argonne National Labs next-generation Emergency Management software and tools, called ‘EMTools’ (http://www.dis.anl.gov/pubs/62348.pdf). This application included a ‘1-click’ installation, which automatically installed all parts of a SharePoint Solution; from creating the IIS Web Site, building the SharePoint Web Application, creating the Site Collection and Root Site based on a custom template, and adding user permissions. 
+                    <div class="f16 myBody">
+                        Architected and implemented the SharePoint components of Argonne National Labs next-generation Emergency Management software and tools, called ‘EMTools’ (http://www.dis.anl.gov/pubs/62348.pdf). This application included a ‘1-click’ installation, which automatically installed all parts of a SharePoint Solution; from creating the IIS Web Site, building the SharePoint Web Application, creating the Site Collection and Root Site based on a custom template, and adding user permissions. Also architected and implemented the back-end SharePoint / .NET custom extensibility components.
                     </div>
-                    <div class="f12 myBody">
+                    <div class="f16 myBody">
                         SharePoint 2007, Visual Studio 2008, Microsoft .NET Framework 3.5, C#
                     </div>
                 </div>
@@ -1028,7 +1058,6 @@
         </div>
     </script>
 
-    <div id="qrcode" style="display: none;"></div>
 
 
 
